@@ -1,18 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
-
+const main = require('./views/main');
 const app = express();
 
 // parses data received from user into a format usable by the server
 app.use(express.urlencoded({ extended: false }));
-
 // makes this directory available to the user
 app.use(express.static(__dirname + "/public"));
-
 app.use(morgan("dev"));
+
+// const main = main;
 
 app.get("/", (req, res) => {
     console.log("Hello, World!");
+    res.send(main);
 })
 
 const PORT = 1337;
