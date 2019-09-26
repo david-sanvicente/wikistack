@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const main = require('./views/main');
+const layout = require('./views/layout');
 const app = express();
 
 // parses data received from user into a format usable by the server
@@ -13,7 +14,7 @@ app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
     console.log("Hello, World!");
-    res.send(main);
+    res.send(layout('IS IT LUNCH TIME YET!?'));
 })
 
 const PORT = 1337;
