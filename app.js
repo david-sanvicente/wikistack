@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const main = require('./views/main');
 const layout = require('./views/layout');
+const { db } = require('./models');
 const app = express();
 
 // parses data received from user into a format usable by the server
@@ -10,7 +11,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(morgan("dev"));
 
-// const main = main;
+db.authenticate().
+then(() => {
+  console.log('connected to the database');
+})
 
 app.get("/", (req, res) => {
     console.log("Hello, World!");
